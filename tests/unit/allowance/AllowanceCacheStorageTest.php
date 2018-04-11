@@ -114,12 +114,12 @@ class AllowanceCacheStorageTest extends TestCase
             verify('referenced cache object should be returned', $model->getCache())->same($model->cache);
 
             $model->cache = 'yii\caching\DummyCache';
-            verify('created cache object specified by class name should be returned', $model->getCache())->isInstanceOf(DummyCache::className());
+            verify('created cache object specified by class name should be returned', $model->getCache())->isInstanceOf(DummyCache::class);
 
             $model->cache = [
                 'class' => 'yii\caching\DummyCache',
             ];
-            verify('created cache object specified by array should be returned', $model->getCache())->isInstanceOf(DummyCache::className());
+            verify('created cache object specified by array should be returned', $model->getCache())->isInstanceOf(DummyCache::class);
         });
     }
 

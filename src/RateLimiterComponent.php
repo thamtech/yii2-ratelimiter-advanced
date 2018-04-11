@@ -128,7 +128,7 @@ class RateLimiterComponent extends ServiceLocator
 
         // construct key used to scope the allowance data
         $scopeId = implode('-', [
-            static::className(),
+            static::class,
             isset($this->owner->owner) ? $this->owner->owner->className() : '', // class name of Controller applying the rate limit
             $rateLimitId,
             $rateLimit->getId($context, $rateLimitId),
@@ -210,7 +210,7 @@ class RateLimiterComponent extends ServiceLocator
     {
         if (is_array($rateLimit)) {
             if (!isset($rateLimit['class'])) {
-                $rateLimit['class'] = RateLimit::className();
+                $rateLimit['class'] = RateLimit::class;
             }
             $rateLimit = Yii::createObject($rateLimit);
         }

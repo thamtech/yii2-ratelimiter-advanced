@@ -124,7 +124,7 @@ class AllowanceCacheStorage extends BaseObject implements AllowanceStorageInterf
     {
         return implode('-', [
             $this->cacheKeyPrefix,
-            static::className(),
+            static::class,
             $id,
         ]);
     }

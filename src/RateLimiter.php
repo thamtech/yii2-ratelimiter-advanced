@@ -201,7 +201,7 @@ class RateLimiter extends ActionFilter
                 $componentConfig[$key] = $value;
             }
         }
-        $componentConfig['class'] = RateLimiterComponent::className();
+        $componentConfig['class'] = RateLimiterComponent::class;
         $componentConfig['owner'] = $this;
 
         return $componentConfig;
