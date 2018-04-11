@@ -7,7 +7,7 @@
 
 namespace thamtech\ratelimiter\limit;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * RateLimitResult represents the result of a rate limit check along with a
@@ -15,7 +15,7 @@ use yii\base\Object;
  *
  * @author Tyler Ham <tyler@thamtech.com>
  */
-class RateLimitResult extends Object
+class RateLimitResult extends BaseObject
 {
     /**
      * @var int unix timestamp at the time the rate limit was checked

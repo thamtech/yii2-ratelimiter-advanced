@@ -7,7 +7,7 @@
 
 namespace thamtech\ratelimiter\limit;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * DefaultRateLimitProvider is the default implementation of
@@ -53,7 +53,7 @@ use yii\base\Object;
  *
  * @author Tyler Ham <tyler@thamtech.com>
  */
-class DefaultRateLimitProvider extends Object
+class DefaultRateLimitProvider extends BaseObject
 {
     /**
      * @var array Rate Limit definitions

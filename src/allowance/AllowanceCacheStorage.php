@@ -9,7 +9,7 @@ namespace thamtech\ratelimiter\allowance;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\caching\Cache;
 
 /**
@@ -18,7 +18,7 @@ use yii\caching\Cache;
  *
  * @author Tyler Ham <tyler@thamtech.com>
  */
-class AllowanceCacheStorage extends Object implements AllowanceStorageInterface
+class AllowanceCacheStorage extends BaseObject implements AllowanceStorageInterface
 {
     /**
      * @var Cache|string|array the cache object, the ID of the cache

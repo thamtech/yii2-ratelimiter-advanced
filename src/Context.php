@@ -7,7 +7,7 @@
 
 namespace thamtech\ratelimiter;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * A Context object olds the [[\yii\web\Request]] and [[\yii\base\Action]] in
@@ -15,7 +15,7 @@ use yii\base\Object;
  *
  * @author Tyler Ham <tyler@thamtech.com>
  */
-class Context extends Object
+class Context extends BaseObject
 {
     /**
      * @var \yii\web\Request the current request

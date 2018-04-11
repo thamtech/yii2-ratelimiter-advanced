@@ -7,7 +7,7 @@
 
 namespace thamtech\ratelimiter\limit;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * RateLimit represents the parameters needed to establish a rate limit.
@@ -16,7 +16,7 @@ use yii\base\Object;
  *
  * @author Tyler Ham <tyler@thamtech.com>
  */
-class RateLimit extends Object implements RateLimitInterface
+class RateLimit extends BaseObject implements RateLimitInterface
 {
     /**
      * @var bool|callable Indicates if this rate limit is currently active.
