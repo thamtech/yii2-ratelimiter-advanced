@@ -8,7 +8,7 @@
 namespace thamtech\ratelimiter;
 
 use Yii;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\di\ServiceLocator;
 use thamtech\ratelimiter\limit\RateLimit;
 use thamtech\ratelimiter\limit\RateLimitResult;
@@ -204,7 +204,7 @@ class RateLimiterComponent extends ServiceLocator
      *
      * @return RateLimit
      *
-     * @throws InvalidParamException
+     * @throws InvalidArgumentException
      */
     public function asRateLimit($rateLimit, $context)
     {
@@ -219,7 +219,7 @@ class RateLimiterComponent extends ServiceLocator
             return $rateLimit->getRateLimit($context);
         }
 
-        throw new InvalidParamException('The rateLimit must be an instance of thamtech\ratelimiter\limit\RateLimitInterface or be a configuration array to create one.');
+        throw new InvalidArgumentException('The rateLimit must be an instance of thamtech\ratelimiter\limit\RateLimitInterface or be a configuration array to create one.');
     }
 
     /**

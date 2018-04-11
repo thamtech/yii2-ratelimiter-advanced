@@ -339,7 +339,7 @@ class RateLimiterTest extends TestCase
     }
 
     /**
-     * @expectedException yii\base\InvalidParamException
+     * @expectedException yii\base\InvalidArgumentException
      * @expectedExceptionMessage The rateLimit must be an instance of thamtech\ratelimiter\limit\RateLimitInterface or be a configuration array to create one.
      */
     public function testAsRateLimitBadConfig()
@@ -351,7 +351,7 @@ class RateLimiterTest extends TestCase
     }
 
     /**
-     * @expectedException yii\base\InvalidParamException
+     * @expectedException yii\base\InvalidArgumentException
      * @expectedExceptionMessage The rateLimit must be an instance of thamtech\ratelimiter\limit\RateLimitInterface or be a configuration array to create one.
      */
     public function testAsRateLimitBadObject()
