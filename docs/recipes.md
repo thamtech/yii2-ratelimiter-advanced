@@ -1,6 +1,13 @@
 Yii2 Advanced Rate Limiter Recipes
 ==================================
 
+* [Basic Limit](#basic-limit)
+* [Basic Limit Per IP Address](#basic-limit-per-ip-address)
+* [Basic Limit Per User ID](#basic-limit-per-user-id)
+* [Different Limits for Different Identifiers](#different-limits-for-different-identifiers)
+* [Different Limits for Different Controller Actions](#different-limits-for-different-controller-actions)
+* [Advanced Rate Limits](#advanced-rate-limits)
+
 Basic Limit
 -----------
 
