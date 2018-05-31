@@ -35,13 +35,13 @@ Installation
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
 ```
-php composer.phar require --prefer-dist thamtech/yii2-advanced-ratelimiter
+php composer.phar require --prefer-dist thamtech/yii2-ratelimiter-advanced
 ```
 
 or add
 
 ```
-"thamtech/yii2-advanced-ratelimiter": "*"
+"thamtech/yii2-ratelimiter-advanced": "*"
 ```
 
 to the `require` section of your `composer.json` file.
