@@ -1,0 +1,9 @@
+before_script:
+- composer self-update
+- composer --version
+- composer global require "fxp/composer-asset-plugin:~1.1.1"
+- composer install --prefer-dist --no-interaction
+- composer show -i
+
+job:
+  script: "vendor/bin/codecept run"

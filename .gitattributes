@@ -8,5 +8,6 @@
 /.gitlab-ci.yml     export-ignore
 /.php_cs            export-ignore
 /phpunit.xml.dist   export-ignore
+/codeception.yml    export-ignore
 /tests              export-ignore
 /docs               export-ignore

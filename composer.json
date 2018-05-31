@@ -1,0 +1,29 @@
+{
+    "name": "thamtech/yii2-ratelimiter-advanced",
+    "description": "An advanced request rate limiter",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Tyler Ham",
+            "email": "tyler@thamtech.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "<2.1"
+    },
+    "autoload": {
+        "psr-4": { "thamtech\\ratelimiter\\": "src/" }
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-faker": "*",
+        "codeception/codeception": "2.0.*",
+        "codeception/specify": "*",
+        "codeception/verify": "*",
+        "flow/jsonpath": "^0.3"
+    }
+}

@@ -1,7 +1,7 @@
 Yii2 Advanced Rate Limiter is free software. It is released under the terms of
 the following BSD License.
 
-Copyright © 2016 by Thamtech, LLC (https://www.thamtech.com)
+Copyright © 2016-2018 by Thamtech, LLC (https://thamtech.com)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
