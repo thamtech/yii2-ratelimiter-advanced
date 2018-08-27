@@ -447,7 +447,7 @@ For example, if you want to whitelist an IP address:
 <?php
 ...
 'on rateLimitsExceeded' => function($event) {
-    if ($request->getUserIp() == '127.0.0.1') {
+    if ($event->context->request->getUserIp() == '127.0.0.1') {
         $event->handled = true;
     }
     // other handlers will not be invoked when IP is 127.0.0.1
