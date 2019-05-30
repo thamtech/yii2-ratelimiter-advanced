@@ -118,14 +118,14 @@ class AllowanceCacheStorage extends BaseObject implements AllowanceStorageInterf
      *
      * @param string allowance scope ID
      *
-     * @return string the cache key
+     * @return mixed the cache key
      */
     protected function getCacheKey($id)
     {
-        return implode('-', [
-            $this->cacheKeyPrefix,
+        return [
             static::class,
+            $this->cacheKeyPrefix,
             $id,
-        ]);
+        ];
     }
 }

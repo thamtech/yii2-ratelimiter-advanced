@@ -40,7 +40,7 @@ class AllowanceCacheStorageTest extends TestCase
             ];
             $model->saveAllowance('id2', null, 456, time(), 3600);
 
-            verify('allowance was saved', $model->getCache()->get('allowance-tests\unit\allowance\TestableAllowanceCacheStorage-id2'))->equals($expected);
+            verify('allowance was saved', $model->getCache()->get(['tests\unit\allowance\TestableAllowanceCacheStorage', 'allowance', 'id2']))->equals($expected);
         });
     }
 
@@ -64,7 +64,7 @@ class AllowanceCacheStorageTest extends TestCase
                 'allowance' => 123,
                 'timestamp' => time() - 1800, // half an hour ago
             ];
-            $model->cache->set('allowance-tests\unit\allowance\TestableAllowanceCacheStorage-id2', $expected, 1800); // half an hour until expiration
+            $model->cache->set(['tests\unit\allowance\TestableAllowanceCacheStorage', 'allowance', 'id2'], $expected, 1800); // half an hour until expiration
             verify('cached allowance is returned', $model->loadAllowance('id2', null))->equals($expected);
         });
 
@@ -74,7 +74,7 @@ class AllowanceCacheStorageTest extends TestCase
                 'allowance' => 123,
                 'timestamp' => time() - 7200, // two hours ago
             ];
-            $model->cache->set('allowance-tests\unit\allowance\TestableAllowanceCacheStorage-id3', $cached, -3600); // already expired
+            $model->cache->set(['tests\unit\allowance\TestableAllowanceCacheStorage', 'allowance', 'id3'], $cached, -3600); // already expired
 
             $expected = [
                 'allowance' => $model->defaultAllowance,
@@ -91,14 +91,14 @@ class AllowanceCacheStorageTest extends TestCase
         $model = new TestableAllowanceCacheStorage();
 
         $this->specify('getCacheKey should return correct id', function () use ($model) {
-            verify('empty id results in correct key', $model->getCacheKey(''))->equals('allowance-tests\unit\allowance\TestableAllowanceCacheStorage-');
-            verify('null id results in correct key', $model->getCacheKey(null))->equals('allowance-tests\unit\allowance\TestableAllowanceCacheStorage-');
-            verify('normal id results in correct key', $model->getCacheKey('abc'))->equals('allowance-tests\unit\allowance\TestableAllowanceCacheStorage-abc');
+            verify('empty id results in correct key', $model->getCacheKey(''))->equals(['tests\unit\allowance\TestableAllowanceCacheStorage', 'allowance', '']);
+            verify('null id results in correct key', $model->getCacheKey(null))->equals(['tests\unit\allowance\TestableAllowanceCacheStorage', 'allowance', null]);
+            verify('normal id results in correct key', $model->getCacheKey('abc'))->equals(['tests\unit\allowance\TestableAllowanceCacheStorage', 'allowance', 'abc']);
 
             $model->cacheKeyPrefix = null;
-            verify('empty id results in correct key', $model->getCacheKey(''))->equals('-tests\unit\allowance\TestableAllowanceCacheStorage-');
-            verify('null id results in correct key', $model->getCacheKey(null))->equals('-tests\unit\allowance\TestableAllowanceCacheStorage-');
-            verify('normal id results in correct key', $model->getCacheKey('abc'))->equals('-tests\unit\allowance\TestableAllowanceCacheStorage-abc');
+            verify('empty id results in correct key', $model->getCacheKey(''))->equals(['tests\unit\allowance\TestableAllowanceCacheStorage', null, '']);
+            verify('null id results in correct key', $model->getCacheKey(null))->equals(['tests\unit\allowance\TestableAllowanceCacheStorage', null, null]);
+            verify('normal id results in correct key', $model->getCacheKey('abc'))->equals(['tests\unit\allowance\TestableAllowanceCacheStorage', null, 'abc']);
         });
     }
 
