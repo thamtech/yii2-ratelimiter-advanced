@@ -127,12 +127,7 @@ class RateLimiterComponent extends ServiceLocator
         $window = $rateLimit->window;
 
         // construct key used to scope the allowance data
-        $scopeId = implode('-', [
-            static::class,
-            isset($this->owner->owner) ? $this->owner->owner->className() : '', // class name of Controller applying the rate limit
-            $rateLimitId,
-            $rateLimit->getId($context, $rateLimitId),
-        ]);
+        $scopeId = $this->getDefaultScopeId($this->owner, $rateLimit, $context, $rateLimitId);
 
         // get allowance parameters
         $allowanceInfo = $this->allowanceStorage->loadAllowance($scopeId, $context);
@@ -268,5 +263,31 @@ class RateLimiterComponent extends ServiceLocator
                 'cache' => 'yii\caching\DummyCache',
             ],
         ];
+    }
+
+    /**
+     * Gets the default scope ID array
+     *
+     * @param RateLimiter $rateLimiter the RateLimiter object that delegates to
+     * this component
+     *
+     * @param RateLimit $rateLimit the rate limit
+     *
+     * @param \thamtech\ratelimiter\Context $context the current request/action
+     *     context
+     *
+     * @param string $rateLimitId The array key that defined the rate limit
+     *    in the [[RateLimiter]].\
+     *
+     * @return string scope ID
+     */
+    protected function getDefaultScopeId($rateLimiter, $rateLimit, $context, $rateLimitId)
+    {
+        return implode('-', [
+            static::class,
+            isset($rateLimiter->owner) ? $rateLimiter->owner->className() : '', // class name of Controller applying the rate limit
+            $rateLimitId,
+            $rateLimit->getId($context, $rateLimitId),
+        ]);
     }
 }
