@@ -32,9 +32,6 @@ interface RateLimitInterface
      * @param \thamtech\ratelimiter\Context $context the current request/action
      *     context
      *
-     * @param string $rateLimitId The array key that defined the rate limit
-     *    in the [[RateLimiter]].
-     *
      * @return RateLimit|array A [[RateLimit]] object or an array of
      *     [[RateLimit]] properties.
      *
