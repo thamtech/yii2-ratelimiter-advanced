@@ -228,6 +228,64 @@ class RateLimiterTest extends TestCase
         $rateLimiter->beforeAction(null);
     }
 
+    /**
+     * @expectedException yii\web\TooManyRequestsHttpException
+     * @expectedExceptionMessage This is a test TooManyRequestsHttpException message.
+     */
+    public function testBeforeActionExceptionWithOwnerAndScopeIdProvider()
+    {
+        $definitions = [
+            'ip' => [
+                'limit' => 100,
+                'window' => 7200,
+                'identifier' => function($context, $rateLimitId) {
+                    return $context->request->getUserIP();
+                },
+            ],
+            'user' => [
+                'limit' => 1000,
+                'window' => 3600,
+                'identifier' => 1,
+            ],
+        ];
+
+        $rateLimiter = new RateLimiter([
+            'components' => [
+                'allowanceStorage' => [
+                    'cache' => 'yii\caching\ArrayCache',
+                ],
+                'rateLimit' => [
+                    'definitions' => $definitions,
+                ],
+            ],
+            'scopeIdProvider' => function ($rateLimiter, $rateLimit, $context, $rateLimitId) {
+                return implode('==', [
+                    'TEST1',
+                    $rateLimitId,
+                    $rateLimit->getId($context, $rateLimitId)
+                ]);
+            },
+            'owner' => new Context(), // not normal usage; just testing to make sure it picks up the className of the owner object
+            'as tooManyRequestsException' => [
+                'class' => 'thamtech\ratelimiter\handlers\TooManyRequestsHttpExceptionHandler',
+                'message' => 'This is a test TooManyRequestsHttpException message.'
+            ],
+        ]);
+
+        $context = new Context();
+
+        // set allowance to 0 in storage; this 'user' limit is exceeded
+        $rateLimiter->allowanceStorage->saveAllowance(
+            'TEST1==user==1',
+            $context,
+            0,
+            time() - 10, // 10 seconds ago
+            3600
+        );
+
+        $rateLimiter->beforeAction(null);
+    }
+
     public function testBeforeActionBlocked()
     {
         $definitions = [

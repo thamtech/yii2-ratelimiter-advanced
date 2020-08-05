@@ -48,6 +48,17 @@ class RateLimiterComponent extends ServiceLocator
     public $owner;
 
     /**
+     * @var callable|\Closure a callable that provides a scope ID array. The
+     * signature of the function should be the following:
+     * `function ($rateLimiter, $rateLimit, $context, $rateLimitId)` and
+     * should return a scope ID. If not specified, [[getDefaultScopeId()]] is
+     * called instead.
+     *
+     * @see RateLimiterComponent::getDefaultScopeId()
+     */
+    public $scopeIdProvider;
+
+    /**
      * Constructor.
      *
      * @param array $config name-value pairs that will be used to initialize the
@@ -57,6 +68,16 @@ class RateLimiterComponent extends ServiceLocator
     {
         $this->preInit($config);
         parent::__construct($config);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        if (!is_callable($this->scopeIdProvider)) {
+            $this->scopeIdProvider = [$this, 'getDefaultScopeId'];
+        }
     }
 
     /**
@@ -127,7 +148,7 @@ class RateLimiterComponent extends ServiceLocator
         $window = $rateLimit->window;
 
         // construct key used to scope the allowance data
-        $scopeId = $this->getDefaultScopeId($this->owner, $rateLimit, $context, $rateLimitId);
+        $scopeId = call_user_func($this->scopeIdProvider, $this->owner, $rateLimit, $context, $rateLimitId);
 
         // get allowance parameters
         $allowanceInfo = $this->allowanceStorage->loadAllowance($scopeId, $context);
