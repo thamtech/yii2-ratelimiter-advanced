@@ -40,4 +40,17 @@ interface RateLimitInterface
      * @author Qiang Xue <qiang.xue@gmail.com>
      */
     public function getRateLimit($context);
+
+    /**
+     * Indicates whether or not this rate limit should be checked.
+     *
+     * @param \thamtech\ratelimiter\Context $context the current request/action
+     *     context
+     *
+     * @param string $rateLimitId The array key that defined the rate limit
+     *    in the [[RateLimiter]].
+     *
+     * @return bool [description]
+     */
+    public function isActive($context, $rateLimitId);
 }
